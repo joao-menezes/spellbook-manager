@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spellbook Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div id="toast-container" aria-live="polite"></div>
+
+    <div class="topbar">
+        <label>
+            <select id="languageSelect" class="language-selector"></select>
+        </label>
+
+        <h1 data-i18n="title">📖 Spellbook Manager</h1>
+    </div>
+
+    <div class="section upload">
+        <h2 data-i18n="uploadTitle">📂 Upload Spellbook</h2>
+        <input type="file" id="jsonFile" />
+        <button onclick="handleFileUpload()" data-i18n="uploadButton">Upload File</button>
+    </div>
+
+    <div class="section">
+        <h2 data-i18n="addTitle">✨ Add New Spell</h2>
+
+        <div class="form-grid">
+            <input type="text" id="nome" data-i18n-placeholder="spellName" placeholder="Spell Name" required>
+            <input type="text" id="original" data-i18n-placeholder="originalName" placeholder="Original Name" required>
+            <input type="text" id="nivel" data-i18n-placeholder="level" placeholder="Level" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" id="escola" data-i18n-placeholder="school" placeholder="School" required>
+            <input type="text" id="tempo" data-i18n-placeholder="castingTime" placeholder="Casting Time" required>
+            <input type="text" id="alcance" data-i18n-placeholder="range" placeholder="Range" required>
+            <input type="text" id="componentes" data-i18n-placeholder="components" placeholder="Components" required>
+            <input type="text" id="duracao" data-i18n-placeholder="duration" placeholder="Duration" required>
+            <input type="text" id="classes" data-i18n-placeholder="classes" placeholder="Classes" required>
+            <input type="text" id="sublaclasses" data-i18n-placeholder="subclasses" placeholder="Subclasses" required>
+
+            <div class="checkbox-group">
+                <label><input type="checkbox" id="materiaispagos"> <span data-i18n="materialCost">Material Cost</span></label>
+                <label><input type="checkbox" id="concentracao"> <span data-i18n="concentration">Concentration</span></label>
+                <label><input type="checkbox" id="ritual"> <span data-i18n="ritual">Ritual</span></label>
+            </div>
+
+            <textarea id="descricao" data-i18n-placeholder="description" placeholder="Spell Description" class="full-width"></textarea>
+
+            <button onclick="addSpell()" class="full-width" data-i18n="addSpell">✨ Add Spell</button>
+
+        </div>
+    </div>
+
+    <div class="section download">
+        <h2 data-i18n="downloadTitle">📥 Download Updated Spellbook</h2>
+        <button data-i18n="downloadButton" onclick="downloadSpellbook()"><i class="fas fa-download"></i> Download JSON</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+<script src="i18n/i18n.js"></script>
+</body>
+</html>
