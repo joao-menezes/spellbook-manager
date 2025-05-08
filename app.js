@@ -9,6 +9,8 @@ function handleFileUpload() {
         return;
     }
 
+    showLoadingIndicator(true)
+
     const reader = new FileReader();
     reader.onload = function(event) {
         try {
@@ -16,15 +18,31 @@ function handleFileUpload() {
             showToast("success", "File loaded successfully!");
         } catch (error) {
             showToast("error", "Failed to process JSON!");
+        }finally {
+            showLoadingIndicator(false)
         }
     };
     reader.readAsText(file);
+}
+
+function showLoadingIndicator(isLoading) {
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    if (isLoading) {
+        loadingIndicator.style.display = 'block';
+    } else {
+        loadingIndicator.style.display = 'none';
+    }
 }
 
 function addSpell() {
     try {
         if (!spellbook) {
             showToast("error", "Please load a JSON file first!");
+            return;
+        }
+
+        if (!validateSpellForm()) {
+            showToast("error", "Please fill in all fields correctly!");
             return;
         }
 
@@ -61,6 +79,20 @@ function addSpell() {
         showToast("error", `Error while adding spell!`);
     }
 }
+
+function validateSpellForm() {
+    let isValid = true;
+    document.querySelectorAll('input').forEach(input => {
+        if (input.value.trim() === "") {
+            input.style.borderColor = "red";
+            isValid = false;
+        } else {
+            input.style.borderColor = "#a9742d";
+        }
+    });
+    return isValid;
+}
+
 
 function downloadSpellbook() {
     if (!spellbook) {
